@@ -14,5 +14,6 @@ int main(){
         cout<<*pointer<<endl;
         pointer=pointer+1;
     }
+    
 
 }
