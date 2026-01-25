@@ -38,7 +38,6 @@ node  *insertatend(node *root,int value){
     return root;
 
 }
-
 node *remove_value(node *root,int value){
     if(root==NULL){
         cout<<"nothing to remove"<<endl;
