@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 struct node{
     int data;
@@ -54,6 +55,50 @@ node *iterative(node *root,int value){
     }
     return root;
 }
+void inorder(node *root){
+    if(root!=NULL){
+        inorder(root->left);
+        cout<<root->data<<endl;
+        inorder(root->right);
+    }
+}
+
+
+void preorder(node *root){
+    if(root!=NULL){
+        cout<<root->data<<endl;
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(node *root){
+    if(root!=NULL){
+        
+        postorder(root->left);
+        postorder(root->right);
+        cout<<root->data<<endl;
+    }
+}
+
+
+void bfs(node *root){
+    if(root==NULL) return;
+    queue<node*> q;
+    q.push(root);
+    while(!q.empty()){
+        node *curr=q.front();
+        q.pop();
+        cout<<curr->data<<endl;
+        if(curr->left!=NULL){
+            q.push(curr->left);
+        }
+        if(curr->right!=NULL){
+            q.push(curr->right);
+        }
+    }
+}
+
 int main(){
     node *root=NULL;
     root=insert(root,100);
@@ -62,6 +107,14 @@ int main(){
     display(root);
     root=iterative(root,200);
     display(root);
+    cout<<"inorder of tree"<<endl;
+    inorder(root);
+    cout<<"preorder of tree"<<endl;
+    preorder(root);
+    cout<<"postorder of tree"<<endl;
+    postorder(root);
+    cout<<"bfs"<<endl;
+    bfs(root);
 
 
 }
