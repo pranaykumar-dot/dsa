@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<stack>
 using namespace std;
 struct node{
     int data;
@@ -82,6 +83,25 @@ void postorder(node *root){
 }
 
 
+
+void dfs(node *root){
+    if(root==NULL) return;
+    stack<node*> s;
+    s.push(root);
+    while(!s.empty()){
+        node *curr=s.top();
+        s.pop();
+        cout<<curr->data<<endl;
+        if(curr->right!=nullptr){
+            s.push(curr->right);
+        }
+        if(curr->left!=nullptr){
+            s.push(curr->left);
+        }
+    }
+
+}
+
 void bfs(node *root){
     if(root==NULL) return;
     queue<node*> q;
@@ -115,6 +135,8 @@ int main(){
     postorder(root);
     cout<<"bfs"<<endl;
     bfs(root);
+    cout<<"dfs depth first search"<<endl;
+    dfs(root);
 
 
 }
