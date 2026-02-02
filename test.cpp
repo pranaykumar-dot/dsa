@@ -1,29 +1,24 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
+#include<unordered_map>
 using namespace std;
-int rec(int value){
-    if(value<=0){
-        return 0;
-    }
-    else{
-        int result=value+rec(value-1)+rec(value-2);
-        return result;
-    }
-}
 int main(){
-    int result=rec(5);
-    cout<<result<<endl;
-    auto method=[result](){
-        int value=10;
-        cout<<value<<endl;
-        cout<<value+result<<endl;
-    };
-    method();
-    vector<int> trips={4,3,12,4,56};
-    sort(trips.rbegin(),trips.rend());
-    for(auto &i:trips){
-        cout<<i<<endl;
+    unordered_map<char,int> map;
+    string name="aaaabbbbccccaaaad";
+    for(int i=0;i<name.size();i++){
+        map[name[i]]++;
     }
+    for(char c:name){
+        if(map[c]==1){
+            cout<<c<<endl;
+            break;
+        }
+    }
+    for(auto i:map){
+        cout<<i.first<<i.second<<endl;
+    }
+    cout<<"not found in he map"<<endl;
     return 0;
+
 }

@@ -1,13 +1,12 @@
 #include<iostream>
 #include<vector>
 #include<fstream>
-#include <openacc.h>
 using namespace std;
 int main(){
     vector<int> object;
     vector<int> temp[5];
     object.push_back(10);
-    for(auto i:object){
+    for(int i:object){
         cout<<i<<endl;
     }
     vector<vector<int>> o;

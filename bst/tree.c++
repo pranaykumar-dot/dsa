@@ -12,6 +12,16 @@ struct node{
         right=NULL;
     }
 };
+node *findmin(node *root){
+    if(root==NULL){
+        return NULL;
+    }
+    while(root->left!=NULL){
+        root=root->left;
+
+    }
+    return root;
+}
 node *insert(node *root,int value){
     if (root==NULL){
         node *n=new node(value);
@@ -82,7 +92,35 @@ void postorder(node *root){
     }
 }
 
+node* deleteNode(node* root, int key) {
+    if (root == NULL) return NULL;
 
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    }
+    else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    }
+    else {
+        // case 1 and 2: one child or no child
+        if (root->left == NULL) {
+            node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->right == NULL) {
+            node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // case 3: two children
+        node* succ = findmin(root->right); // inorder successor
+        root->data = succ->data;           // copy value
+        root->right = deleteNode(root->right, succ->data); // delete successor
+    }
+    return root;
+}
 
 void dfs(node *root){
     if(root==NULL) return;
@@ -110,7 +148,7 @@ void bfs(node *root){
         node *curr=q.front();
         q.pop();
         cout<<curr->data<<endl;
-        if(curr->left!=NULL){
+        if(curr->left!=NULL){  
             q.push(curr->left);
         }
         if(curr->right!=NULL){
@@ -137,6 +175,7 @@ int main(){
     bfs(root);
     cout<<"dfs depth first search"<<endl;
     dfs(root);
-
+    root=deleteNode(root,200);
+    dfs(root);
 
 }
